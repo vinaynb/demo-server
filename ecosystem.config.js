@@ -15,13 +15,13 @@ module.exports = {
       env_production : {
         NODE_ENV: "production"
       }
-    }/*,
+    },
 
     // Second application
     {
       name      : "Server 2",
-      script    : "server-2/index.js"
-    }*/
+      script    : "../server-2/index.js"
+    }
   ],
 
   /**
@@ -31,7 +31,7 @@ module.exports = {
   deploy : {
     production : {
       user : "ubuntu",
-      host : "54.169.50.230",
+      host : ["54.169.50.230","52.77.209.244"],
       ref  : "origin/master",
       repo : "https://github.com/vinaynb/demo-server.git",
       path : "/home/ubuntu/Desktop/pm2Test",

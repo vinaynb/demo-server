@@ -30,11 +30,11 @@ module.exports = {
    */
   deploy : {
     production : {
-      user : "deploy",
-      host : "192.168.1.18",
+      user : "ubuntu",
+      host : "54.169.50.230",
       ref  : "origin/master",
       repo : "https://github.com/vinaynb/demo-server.git",
-      path : "/home/deploy/Desktop/pm2Test",
+      path : "/home/ubuntu/Desktop/pm2Test",
       "post-deploy" : "pm2 startOrRestart ecosystem.config.js --env production"
     },
     dev : {

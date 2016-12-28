@@ -34,7 +34,7 @@ module.exports = {
       host : "192.168.1.18",
       ref  : "origin/master",
       repo : "https://github.com/vinaynb/demo-server.git",
-      path : "/home/deploy/pm2Test",
+      path : "/home/dpc2/Desktop/pm2Test",
       "post-deploy" : "pm2 startOrRestart ecosystem.config.js --env production"
     },
     dev : {

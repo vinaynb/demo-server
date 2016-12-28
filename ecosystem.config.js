@@ -8,7 +8,7 @@ module.exports = {
     // First application
     {
       name      : "Server 1",
-      script    : "index.js",
+      script    : "server-1/index.js",
       env: {
         COMMON_VARIABLE: "true"
       },
@@ -20,7 +20,7 @@ module.exports = {
     // Second application
     {
       name      : "Server 2",
-      script    : "../server-2/index.js"
+      script    : "server-2/index.js"
     }
   ],
 

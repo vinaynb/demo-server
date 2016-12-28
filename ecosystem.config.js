@@ -35,7 +35,7 @@ module.exports = {
       ref  : "origin/master",
       repo : "https://github.com/vinaynb/demo-server.git",
       path : "/home/deploy/Desktop/pm2Test",
-      "post-deploy" : "export PATH=$PATH:/home/raf/.nvm/v0.10.34/bin/ pm2 startOrRestart ecosystem.config.js --env production"
+      "post-deploy" : "pm2 startOrRestart ecosystem.config.js --env production"
     },
     dev : {
       user : "node",

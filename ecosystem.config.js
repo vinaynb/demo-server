@@ -30,8 +30,9 @@ module.exports = {
    */
   deploy : {
     production : {
+      key  : "/home/upc1/Desktop/ELK_Stack.pem",
       user : "ubuntu",
-      host : ["54.169.50.230","52.77.209.244"],
+      host : "54.255.182.213",
       ref  : "origin/master",
       repo : "https://github.com/vinaynb/demo-server.git",
       path : "/home/ubuntu/Desktop/pm2Test",

@@ -88,6 +88,78 @@ scanning(){
 	done
 }
 
+#qc module commands
+qc(){
+	echo "Commands available for QC Module";
+	select yn in "Start" "Stop" "Reload" "Delete" "Status" "Error-logs-real-time" "Error-Logs-100-Lines" "Normal-logs-real-time" "Normal-Logs-100-Lines"; do
+	    case $yn in	        	        	        
+			Status )
+				pm2 status				
+				break;;
+			Start )
+				if [[ $env == 'prod' ]]; then
+					pm2 start $server1_path --name server1 -o $server1_log_path -e $server1_error_log_path
+				else
+					echo "no command"
+				fi
+				break;;
+			Stop )
+				if [[ $env == 'prod' ]]; then
+					pm2 stop server1
+				else
+					echo "no command"
+				fi
+				break;;
+			Delete )
+				if [[ $env == 'prod' ]]; then
+					pm2 delete server1
+				else
+					echo "no command"
+				fi
+				break;;
+			Reload )
+				if [[ $env == 'prod' ]]; then
+					pm2 reload server1
+				else
+					echo "no command"
+				fi
+				break;;
+			#realtime error logs
+			Error-logs-real-time )
+				if [[ $env == 'prod' ]]; then
+					pm2 logs --lines=100 --timestamp="YYYY-MM-DD HH:mm:ss Z" server1 --err
+				else
+					echo "no command"
+				fi
+				break;;
+			#get last 100 lines of error log
+			Error-Logs-100-Lines )				
+				if [[ $env == 'prod' ]]; then
+					tail -n 100 $server1_error_log_path
+				else
+					echo "no command"
+				fi
+				break;;
+			#realtime logs
+			Normal-logs-real-time )
+				if [[ $env == 'prod' ]]; then
+					pm2 logs --lines=100 --timestamp="YYYY-MM-DD HH:mm:ss Z" server1 --out
+				else
+					echo "no command"
+				fi
+				break;;
+			#get last 100 lines log
+			Normal-Logs-100-Lines )
+				if [[ $env == 'prod' ]]; then
+					tail -n 100 $server2_error_log_path
+				else
+					echo "no command"
+				fi
+				break;;			
+	    esac
+	done
+}
+
 #other module commands
 other(){
 	echo "Commands available for Other Module";
@@ -270,14 +342,28 @@ bugTracking(){
 	done
 }
 
+main(){
+	echo "Sub Modules available in Main Module"	
+	select yn in "Scanning" "QC"; do
+		case $yn in
+		Scanning )
+			scanning
+			break;;
+		QC ) 
+			qc
+			break;;
+	esac
+	done
+}
+
 echo "Modules available"
-select yn in "Scanning" "QC" "Bag-Tracking" "Submission" "Other" "All"; do
+select yn in "Main" "Bag-Tracking" "Submission" "Other" "All"; do
     case $yn in
         Main )
-         	scanning
+         	main
          	break;;        
 		Bag-Tracking )
-			bugTracking
+			bagTracking
 			break;;
 		Submission )
 			submission

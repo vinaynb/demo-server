@@ -3,162 +3,29 @@
 env="$1"
 
 if [[ $env == 'prod' ]]; then
-	#production paths
-	server1_path='/home/upc1/MyProj/RND/Pm2Rnd/server-1/index.js';
-	server1_log_path='/home/upc1/MyProj/RND/Pm2Rnd/server-1/log.txt';
-	server1_error_log_path='/home/upc1/MyProj/RND/Pm2Rnd/server-1/err-log.txt';
+	#main server paths
+	main_server_path='/home/upc1/MyProj/RND/Pm2Rnd/server-1/index.js';
+	main_server_log_path='/home/upc1/MyProj/RND/Pm2Rnd/server-1/log.txt';
+	main_server_error_log_path='/home/upc1/MyProj/RND/Pm2Rnd/server-1/err-log.txt';
 
-	server2_path='/home/upc1/MyProj/RND/Pm2Rnd/server-2/index.js';
-	server2_log_path='/home/upc1/MyProj/RND/Pm2Rnd/server-2/log.txt';
-	server2_error_log_path='/home/upc1/MyProj/RND/Pm2Rnd/server-1/err-log.txt';
+	#bag tracking server paths
+	bt_server_path='/home/upc1/MyProj/RND/Pm2Rnd/server-2/index.js';
+	bt_server_log_path='/home/upc1/MyProj/RND/Pm2Rnd/server-2/log.txt';
+	bt_server_error_log_path='/home/upc1/MyProj/RND/Pm2Rnd/server-1/err-log.txt';
+
+	#reporting server server paths
+	reporting_server_path='/home/upc1/MyProj/RND/Pm2Rnd/server-2/index.js';
+	reporting_server_log_path='/home/upc1/MyProj/RND/Pm2Rnd/server-2/log.txt';
+	reporting_server_error_log_path='/home/upc1/MyProj/RND/Pm2Rnd/server-1/err-log.txt';
+
+	#submission tracking server paths
+	submission_server_path='/home/upc1/MyProj/RND/Pm2Rnd/server-2/index.js';
+	submission_server_log_path='/home/upc1/MyProj/RND/Pm2Rnd/server-2/log.txt';
+	submission_server_error_log_path='/home/upc1/MyProj/RND/Pm2Rnd/server-1/err-log.txt';
 else
 	#devlopment paths
 	echo ""
 fi
-
-#scanning module commands
-scanning(){
-	echo "Commands available for Scanning Module";
-	select yn in "Start" "Stop" "Reload" "Delete" "Status" "Error-logs-real-time" "Error-Logs-100-Lines" "Normal-logs-real-time" "Normal-Logs-100-Lines"; do
-	    case $yn in	        	        	        
-			Status )
-				pm2 status				
-				break;;
-			Start )
-				if [[ $env == 'prod' ]]; then
-					pm2 start $server1_path --name server1 -o $server1_log_path -e $server1_error_log_path
-				else
-					echo "no command"
-				fi
-				break;;
-			Stop )
-				if [[ $env == 'prod' ]]; then
-					pm2 stop server1
-				else
-					echo "no command"
-				fi
-				break;;
-			Delete )
-				if [[ $env == 'prod' ]]; then
-					pm2 delete server1
-				else
-					echo "no command"
-				fi
-				break;;
-			Reload )
-				if [[ $env == 'prod' ]]; then
-					pm2 reload server1
-				else
-					echo "no command"
-				fi
-				break;;
-			#realtime error logs
-			Error-logs-real-time )
-				if [[ $env == 'prod' ]]; then
-					pm2 logs --lines=100 --timestamp="YYYY-MM-DD HH:mm:ss Z" server1 --err
-				else
-					echo "no command"
-				fi
-				break;;
-			#get last 100 lines of error log
-			Error-Logs-100-Lines )				
-				if [[ $env == 'prod' ]]; then
-					tail -n 100 $server1_error_log_path
-				else
-					echo "no command"
-				fi
-				break;;
-			#realtime logs
-			Normal-logs-real-time )
-				if [[ $env == 'prod' ]]; then
-					pm2 logs --lines=100 --timestamp="YYYY-MM-DD HH:mm:ss Z" server1 --out
-				else
-					echo "no command"
-				fi
-				break;;
-			#get last 100 lines log
-			Normal-Logs-100-Lines )
-				if [[ $env == 'prod' ]]; then
-					tail -n 100 $server2_error_log_path
-				else
-					echo "no command"
-				fi
-				break;;			
-	    esac
-	done
-}
-
-#qc module commands
-qc(){
-	echo "Commands available for QC Module";
-	select yn in "Start" "Stop" "Reload" "Delete" "Status" "Error-logs-real-time" "Error-Logs-100-Lines" "Normal-logs-real-time" "Normal-Logs-100-Lines"; do
-	    case $yn in	        	        	        
-			Status )
-				pm2 status				
-				break;;
-			Start )
-				if [[ $env == 'prod' ]]; then
-					pm2 start $server1_path --name server1 -o $server1_log_path -e $server1_error_log_path
-				else
-					echo "no command"
-				fi
-				break;;
-			Stop )
-				if [[ $env == 'prod' ]]; then
-					pm2 stop server1
-				else
-					echo "no command"
-				fi
-				break;;
-			Delete )
-				if [[ $env == 'prod' ]]; then
-					pm2 delete server1
-				else
-					echo "no command"
-				fi
-				break;;
-			Reload )
-				if [[ $env == 'prod' ]]; then
-					pm2 reload server1
-				else
-					echo "no command"
-				fi
-				break;;
-			#realtime error logs
-			Error-logs-real-time )
-				if [[ $env == 'prod' ]]; then
-					pm2 logs --lines=100 --timestamp="YYYY-MM-DD HH:mm:ss Z" server1 --err
-				else
-					echo "no command"
-				fi
-				break;;
-			#get last 100 lines of error log
-			Error-Logs-100-Lines )				
-				if [[ $env == 'prod' ]]; then
-					tail -n 100 $server1_error_log_path
-				else
-					echo "no command"
-				fi
-				break;;
-			#realtime logs
-			Normal-logs-real-time )
-				if [[ $env == 'prod' ]]; then
-					pm2 logs --lines=100 --timestamp="YYYY-MM-DD HH:mm:ss Z" server1 --out
-				else
-					echo "no command"
-				fi
-				break;;
-			#get last 100 lines log
-			Normal-Logs-100-Lines )
-				if [[ $env == 'prod' ]]; then
-					tail -n 100 $server2_error_log_path
-				else
-					echo "no command"
-				fi
-				break;;			
-	    esac
-	done
-}
 
 #other module commands
 other(){
@@ -182,8 +49,14 @@ all(){
 	select yn in "Start" "Stop" "Restart" "Delete"; do
     	case $yn in		
         Start )
-			#insert below start commands for all pm2 processes which you wish to start
-         	pm2 start $server1_path --name server1 -l $server1_log_path
+			#main
+         	pm2 start $main_server_path --name main_server -o $main_server_log_path -e $main_server_error_log_path
+			#bag tracking server
+			pm2 start $bt_server_path --name bt_server -o $bt_server_log_path -e $bt_server_error_log_path
+			#reporting server
+			pm2 start $reporting_server_path --name reporting_server -o $reporting_server_log_path -e $reporting_server_error_log_path
+			#submission server
+			pm2 start $submission_server --name server1 -o $submission_server_log_path -e $submission_server_error_log_path
          	break;;        
 		Stop )
 			pm2 stop all
@@ -208,28 +81,99 @@ submission(){
 				break;;
 			Start )
 				if [[ $env == 'prod' ]]; then
-					pm2 start $server1_path --name server1 -o $server1_log_path -e $server1_error_log_path
+					pm2 start $submission_server --name server1 -o $submission_server_log_path -e $submission_server_error_log_path
 				else
 					echo "no command"
 				fi
 				break;;
 			Stop )
 				if [[ $env == 'prod' ]]; then
-					pm2 stop server1
+					pm2 stop submission_server
 				else
 					echo "no command"
 				fi
 				break;;
 			Delete )
 				if [[ $env == 'prod' ]]; then
-					pm2 delete server1
+					pm2 delete submission_server
 				else
 					echo "no command"
 				fi
 				break;;
 			Reload )
 				if [[ $env == 'prod' ]]; then
-					pm2 reload server1
+					pm2 reload submission_server
+				else
+					echo "no command"
+				fi
+				break;;
+			#realtime error logs
+			Error-logs-real-time )
+				if [[ $env == 'prod' ]]; then
+					pm2 logs --lines=100 --timestamp="YYYY-MM-DD HH:mm:ss Z" submission_server --err
+				else
+					echo "no command"
+				fi
+				break;;
+			#get last 100 lines of error log
+			Error-Logs-100-Lines )				
+				if [[ $env == 'prod' ]]; then
+					tail -n 100 $submission_server_error_log_path
+				else
+					echo "no command"
+				fi
+				break;;
+			#realtime logs
+			Normal-logs-real-time )
+				if [[ $env == 'prod' ]]; then
+					pm2 logs --lines=100 --timestamp="YYYY-MM-DD HH:mm:ss Z" submission_server --out
+				else
+					echo "no command"
+				fi
+				break;;
+			#get last 100 lines log
+			Normal-Logs-100-Lines )
+				if [[ $env == 'prod' ]]; then
+					tail -n 100 $submission_server_error_log_path
+				else
+					echo "no command"
+				fi
+				break;;			
+	    esac
+	done
+}
+
+reporting(){
+	echo "Commands available for Reporting Module";
+	select yn in "Start" "Stop" "Reload" "Delete" "Status" "Error-logs-real-time" "Error-Logs-100-Lines" "Normal-logs-real-time" "Normal-Logs-100-Lines"; do
+	    case $yn in	        	        	        
+			Status )
+				pm2 status				
+				break;;
+			Start )
+				if [[ $env == 'prod' ]]; then
+					pm2 start $reporting_server_path --name reporting_server -o $reporting_server_log_path -e $reporting_server_error_log_path
+				else
+					echo "no command"
+				fi
+				break;;
+			Stop )
+				if [[ $env == 'prod' ]]; then
+					pm2 stop reporting_server
+				else
+					echo "no command"
+				fi
+				break;;
+			Delete )
+				if [[ $env == 'prod' ]]; then
+					pm2 delete reporting_server
+				else
+					echo "no command"
+				fi
+				break;;
+			Reload )
+				if [[ $env == 'prod' ]]; then
+					pm2 reload reporting_server
 				else
 					echo "no command"
 				fi
@@ -245,7 +189,7 @@ submission(){
 			#get last 100 lines of error log
 			Error-Logs-100-Lines )				
 				if [[ $env == 'prod' ]]; then
-					tail -n 100 $server1_error_log_path
+					tail -n 100 $reporting_server_error_log_path
 				else
 					echo "no command"
 				fi
@@ -261,7 +205,7 @@ submission(){
 			#get last 100 lines log
 			Normal-Logs-100-Lines )
 				if [[ $env == 'prod' ]]; then
-					tail -n 100 $server2_error_log_path
+					tail -n 100 $reporting_server_error_log_path
 				else
 					echo "no command"
 				fi
@@ -271,7 +215,7 @@ submission(){
 }
 
 #Bag tracking commands
-bugTracking(){
+bagTracking(){
 	echo "Commands available for Scanning Module";
 	select yn in "Start" "Stop" "Reload" "Delete" "Status" "Error-logs-real-time" "Error-Logs-100-Lines" "Normal-logs-real-time" "Normal-Logs-100-Lines"; do
 	    case $yn in	        	        	        
@@ -280,28 +224,28 @@ bugTracking(){
 				break;;
 			Start )
 				if [[ $env == 'prod' ]]; then
-					pm2 start $server1_path --name server1 -o $server1_log_path -e $server1_error_log_path
+					pm2 start $bt_server_path --name bt_server -o $bt_server_log_path -e $bt_server_error_log_path
 				else
 					echo "no command"
 				fi
 				break;;
 			Stop )
 				if [[ $env == 'prod' ]]; then
-					pm2 stop server1
+					pm2 stop bt_server
 				else
 					echo "no command"
 				fi
 				break;;
 			Delete )
 				if [[ $env == 'prod' ]]; then
-					pm2 delete server1
+					pm2 delete bt_server
 				else
 					echo "no command"
 				fi
 				break;;
 			Reload )
 				if [[ $env == 'prod' ]]; then
-					pm2 reload server1
+					pm2 reload bt_server
 				else
 					echo "no command"
 				fi
@@ -309,7 +253,7 @@ bugTracking(){
 			#realtime error logs
 			Error-logs-real-time )
 				if [[ $env == 'prod' ]]; then
-					pm2 logs --lines=100 --timestamp="YYYY-MM-DD HH:mm:ss Z" server1 --err
+					pm2 logs --lines=100 --timestamp="YYYY-MM-DD HH:mm:ss Z" bt_server --err
 				else
 					echo "no command"
 				fi
@@ -317,7 +261,7 @@ bugTracking(){
 			#get last 100 lines of error log
 			Error-Logs-100-Lines )				
 				if [[ $env == 'prod' ]]; then
-					tail -n 100 $server1_error_log_path
+					tail -n 100 $bt_server_error_log_path
 				else
 					echo "no command"
 				fi
@@ -325,7 +269,7 @@ bugTracking(){
 			#realtime logs
 			Normal-logs-real-time )
 				if [[ $env == 'prod' ]]; then
-					pm2 logs --lines=100 --timestamp="YYYY-MM-DD HH:mm:ss Z" server1 --out
+					pm2 logs --lines=100 --timestamp="YYYY-MM-DD HH:mm:ss Z" bt_server --out
 				else
 					echo "no command"
 				fi
@@ -333,7 +277,7 @@ bugTracking(){
 			#get last 100 lines log
 			Normal-Logs-100-Lines )
 				if [[ $env == 'prod' ]]; then
-					tail -n 100 $server2_error_log_path
+					tail -n 100 $bt_server_error_log_path
 				else
 					echo "no command"
 				fi
@@ -343,21 +287,78 @@ bugTracking(){
 }
 
 main(){
-	echo "Sub Modules available in Main Module"	
-	select yn in "Scanning" "QC"; do
-		case $yn in
-		Scanning )
-			scanning
-			break;;
-		QC ) 
-			qc
-			break;;
-	esac
+	echo "Commands available for main Module";
+	select yn in "Start" "Stop" "Reload" "Delete" "Status" "Error-logs-real-time" "Error-Logs-100-Lines" "Normal-logs-real-time" "Normal-Logs-100-Lines"; do
+	    case $yn in	        	        	        
+			Status )
+				pm2 status				
+				break;;
+			Start )
+				if [[ $env == 'prod' ]]; then
+					pm2 start $main_server_path --name main_server -o $main_server_log_path -e $main_server_error_log_path
+				else
+					echo "no command"
+				fi
+				break;;
+			Stop )
+				if [[ $env == 'prod' ]]; then
+					pm2 stop main_server
+				else
+					echo "no command"
+				fi
+				break;;
+			Delete )
+				if [[ $env == 'prod' ]]; then
+					pm2 delete main_server
+				else
+					echo "no command"
+				fi
+				break;;
+			Reload )
+				if [[ $env == 'prod' ]]; then
+					pm2 reload main_server
+				else
+					echo "no command"
+				fi
+				break;;
+			#realtime error logs
+			Error-logs-real-time )
+				if [[ $env == 'prod' ]]; then
+					pm2 logs --lines=100 --timestamp="YYYY-MM-DD HH:mm:ss Z" main_server --err
+				else
+					echo "no command"
+				fi
+				break;;
+			#get last 100 lines of error log
+			Error-Logs-100-Lines )				
+				if [[ $env == 'prod' ]]; then
+					tail -n 100 $main_server_error_log_path
+				else
+					echo "no command"
+				fi
+				break;;
+			#realtime logs
+			Normal-logs-real-time )
+				if [[ $env == 'prod' ]]; then
+					pm2 logs --lines=100 --timestamp="YYYY-MM-DD HH:mm:ss Z" main_server --out
+				else
+					echo "no command"
+				fi
+				break;;
+			#get last 100 lines log
+			Normal-Logs-100-Lines )
+				if [[ $env == 'prod' ]]; then
+					tail -n 100 $main_server_error_log_path
+				else
+					echo "no command"
+				fi
+				break;;			
+	    esac
 	done
 }
 
 echo "Modules available"
-select yn in "Main" "Bag-Tracking" "Submission" "Other" "All"; do
+select yn in "Main" "Bag-Tracking" "Submission" "Reporting" "Other" "All" ; do
     case $yn in
         Main )
          	main
@@ -368,9 +369,12 @@ select yn in "Main" "Bag-Tracking" "Submission" "Other" "All"; do
 		Submission )
 			submission
 			break;;
+		Reporting )
+			reporting
+			break;;
 		All )
 			all
-			break;;
+			break;;		
 		Other )
 			other
 			break;;

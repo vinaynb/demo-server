@@ -4,24 +4,24 @@ env="$1"
 
 if [[ $env == 'prod' ]]; then
 	#main server paths
-	main_server_path='/home/upc1/MyProj/RND/Pm2Rnd/server-1/index.js';
-	main_server_log_path='/home/upc1/MyProj/RND/Pm2Rnd/server-1/log.txt';
-	main_server_error_log_path='/home/upc1/MyProj/RND/Pm2Rnd/server-1/err-log.txt';
+	main_server_path='/home/administrator/ans_scanning/server/Backend/app.js';
+	main_server_log_path='/home/administrator/ans_scanning/server/Backend/log.txt';
+	main_server_error_log_path='/home/administrator/ans_scanning/server/Backend/err-log.txt';
 
 	#bag tracking server paths
-	bt_server_path='/home/upc1/MyProj/RND/Pm2Rnd/server-2/index.js';
-	bt_server_log_path='/home/upc1/MyProj/RND/Pm2Rnd/server-2/log.txt';
-	bt_server_error_log_path='/home/upc1/MyProj/RND/Pm2Rnd/server-1/err-log.txt';
+	bt_server_path='/home/administrator/ans_scanning/server/TrackingServer/index.js';
+	bt_server_log_path='/home/administrator/ans_scanning/server/TrackingServer/log.txt';
+	bt_server_error_log_path='/home/administrator/ans_scanning/server/TrackingServer/err-log.txt';
 
 	#reporting server server paths
-	reporting_server_path='/home/upc1/MyProj/RND/Pm2Rnd/server-2/index.js';
-	reporting_server_log_path='/home/upc1/MyProj/RND/Pm2Rnd/server-2/log.txt';
-	reporting_server_error_log_path='/home/upc1/MyProj/RND/Pm2Rnd/server-1/err-log.txt';
+	reporting_server_path='/home/administrator/ans_scanning/server/ReportServer/app.js';
+	reporting_server_log_path='/home/administrator/ans_scanning/server/ReportServer/log.txt';
+	reporting_server_error_log_path='/home/administrator/ans_scanning/server/ReportServer/err-log.txt';
 
 	#submission tracking server paths
-	submission_server_path='/home/upc1/MyProj/RND/Pm2Rnd/server-2/index.js';
-	submission_server_log_path='/home/upc1/MyProj/RND/Pm2Rnd/server-2/log.txt';
-	submission_server_error_log_path='/home/upc1/MyProj/RND/Pm2Rnd/server-1/err-log.txt';
+	submission_server_path='/home/administrator/ans_scanning/server/SubmissionServer/index.js';
+	submission_server_log_path='/home/administrator/ans_scanning/server/SubmissionServer/log.txt';
+	submission_server_error_log_path='/home/administrator/ans_scanning/server/SubmissionServer/err-log.txt';
 else
 	#devlopment paths
 	echo ""
